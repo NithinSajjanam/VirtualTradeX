@@ -1,10 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv'); // ✅ Only declared once
 const cors = require('cors');
+const path = require('path');
 
 // Load environment variables from .env
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+// Check for critical environment variables
+if (!process.env.JWT_SECRET) {
+  console.warn("Warning: JWT_SECRET is not set in environment variables.");
+} else {
+  console.log("JWT_SECRET loaded:", process.env.JWT_SECRET ? "Yes" : "No");
+}
+
+if (!process.env.JWT_REFRESH_SECRET) {
+  console.warn("Warning: JWT_REFRESH_SECRET is not set in environment variables.");
+} else {
+  console.log("JWT_REFRESH_SECRET loaded:", process.env.JWT_REFRESH_SECRET ? "Yes" : "No");
+}
 
 // Import Middleware & Utils
 const logger = require('./utils/logger');
@@ -28,13 +42,13 @@ app.use(express.json());       // Parse JSON bodies
 app.use(logger);               // Custom request logger
 
 // API Routes
+app.use('/api/ai', aiRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', authenticate, userRoutes);
 app.use('/api/market', marketRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/trades', authenticate, tradeRoutes);
 app.use('/api/portfolio', authenticate, portfolioRoutes);
-app.use('/api/ai', aiRoutes);
 
 // Root route
 app.get('/', (req, res) => {

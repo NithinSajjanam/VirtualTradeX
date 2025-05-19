@@ -4,19 +4,7 @@ import axios from 'axios';
 function NewsTopHoldings() {
   const [news, setNews] = useState([]);
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        // Fetch news related to top holdings from backend API
-        const response = await axios.get('/api/news/top-holdings');
-        setNews(response.data);
-      } catch (error) {
-        console.error('Error fetching news for top holdings:', error);
-      }
-    };
-
-    fetchNews();
-  }, []);
+  
 
   const formatTimeAgo = (dateString) => {
     const date = new Date(dateString);

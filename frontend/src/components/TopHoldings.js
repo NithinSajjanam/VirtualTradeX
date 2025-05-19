@@ -28,9 +28,7 @@ function TopHoldings() {
               <span className="text-right">${holding.currentValue ? holding.currentValue.toLocaleString() : 'N/A'}</span>
             </li>
           ))
-        ) : (
-          <li>No top holdings data available.</li>
-        )}
+        ) : null}
       </ul>
       <div className="mt-4 text-right">
         <a href="/top-holdings" className="text-[#00BFFF] hover:underline font-semibold">

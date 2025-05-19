@@ -4,6 +4,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
+import GeminiChat from './components/GeminiChat';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Dashboard />
             </PrivateRoute>
           } />
+          <Route path="/gemini-chat" element={<GeminiChat />} />
         </Routes>
       </div>
     </Router>

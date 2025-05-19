@@ -10,14 +10,38 @@ function AIChatInput() {
     setIsOpen(!isOpen);
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/generate', { query: input });
-      setResponse(res.data.response);
+      const apiKey = 'AIzaSyBbzgqq7-fnK8H9DaNnGeUXmdqH8913ldQ'; // Replace with your actual API key or use environment variables securely
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: {
+            content: [
+              {
+                text: input
+              }
+            ]
+          }
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response';
+      setResponse(reply);
+
     } catch (error) {
-      console.error('Error communicating with AI service:', error);
-      setResponse('Error communicating with AI service.');
+      console.error('Error communicating with Gemini API:', error);
+      alert('Failed to get response from Gemini API');
     }
   };
 

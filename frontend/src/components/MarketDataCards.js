@@ -9,7 +9,7 @@ function MarketDataCards() {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const symbols = ['AAPL', 'GOOGL', 'TSLA', 'MSFT', 'AMZN', 'FB', 'NVDA', 'NFLX', 'BABA', 'INTC'];
+        const symbols = ['AAPL', 'GOOGL', 'TSLA', 'MSFT', 'AMZN', 'IBM', 'NVDA', 'NFLX', 'BABA', 'INTC'];
         const apiKey = 'd0fn8qhr01qr6dbt4n3gd0fn8qhr01qr6dbt4n40';
         const requests = symbols.map(symbol =>
           axios.get(`https://finnhub.io/api/v1/quote`, {

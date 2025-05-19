@@ -1,9 +1,9 @@
-const express = require('express');
+
+const express = require("express");
 const router = express.Router();
 
-// AI routes removed as AI controller is disabled
-// const { processAIQuery } = require('../controllers/aiController');
+const { generateAIResponse } = require("../controllers/aiController");
 
-// router.post('/generate', processAIQuery);
+router.post("/generate", generateAIResponse);
 
 module.exports = router;
