@@ -97,7 +97,7 @@ Always open to feedback and collaboration.
 
 ## 📄 License
 
-MIT © \[Your Name]
+MIT © \[Nityanandh Sajjanam]
 
 ---
 
